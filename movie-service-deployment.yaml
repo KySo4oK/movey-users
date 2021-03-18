@@ -13,7 +13,7 @@ spec:
         app: movie-service               # мітка Pod по якому вона буде зв'язана з Deployment та Service
     spec:
       containers:
-        - image: ivanluchkin/lab-movie-service:0.0.1    # образ Docker
+        - image: rostyslavpryimak/lab-movie-service:0.0.1    # образ Docker
           imagePullPolicy: Always   # вказує k8s, що образ не потрібно завантажувати (варто використовувати лише для випадків, коли образи локальні)
           name: movie-service           # ім'я контейнеру
           ports:
