@@ -1,5 +1,7 @@
 package micro.user.service.userservice;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,8 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class HelloController {
+    private boolean fail;
     @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello! User microservice is on Kubernetes now!";
+    public ResponseEntity<String> sayHello() {
+        if (fail) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("Hello! User microservice is on Kubernetes now!", HttpStatus.OK);
+    }
+
+    @GetMapping("/fail")
+    public void fail() {
+        fail = true;
+    }
+
+    @GetMapping("/live")
+    public void live() {
+        fail = false;
     }
 }
