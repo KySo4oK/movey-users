@@ -64,7 +64,7 @@
                 </executions>
                 <configuration>
                     <username>rostyslavpryimak</username>
-                    <password></password>
+                    <password>123454321</password>
                     <repository>rostyslavpryimak/lab-user-service</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>

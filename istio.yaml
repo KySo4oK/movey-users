@@ -11,6 +11,6 @@ spec:
             host: user-service-service
       timeout: 5s
       retries:
-        attempts: 3
+        attempts: 100
         retryOn: 5xx
         perTryTimeout: 5s
