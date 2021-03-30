@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-deployment
+  name: movie-service-deployment
 spec:
   replicas: 1                      # кількість екземплярів Pod, що буде створено цим Deployment
   selector:
     matchLabels:
-      app: user-service                # селектор по якому Deployment зв'язаний з Pod
+      app: movie-service                # селектор по якому Deployment зв'язаний з Pod
   template:
     metadata:
       labels:
-        app: user-service               # мітка Pod по якому вона буде зв'язана з Deployment та Service
+        app: movie-service               # мітка Pod по якому вона буде зв'язана з Deployment та Service
     spec:
       containers:
-        - image: rostyslavpryimak/lab-user-service:0.0.1     # образ Docker
+        - image: rostyslavpryimak/lab-movie-service:0.0.2    # образ Docker
           imagePullPolicy: Always   # вказує k8s, що образ не потрібно завантажувати (варто використовувати лише для випадків, коли образи локальні)
-          name: user-service           # ім'я контейнеру
+          name: movie-service           # ім'я контейнеру
           ports:
             - containerPort: 8080

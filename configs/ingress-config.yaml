@@ -20,3 +20,10 @@ spec:
                 name: movie-service-service
                 port:
                   number: 80
+          - path: /db
+            pathType: Prefix
+            backend:
+              service:
+                name: postgres-service
+                port:
+                  number: 5432
