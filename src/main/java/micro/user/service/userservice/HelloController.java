@@ -8,16 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.time.Instant;
 
 @RestController
 @RequestMapping("/user")
 public class HelloController {
-    @Autowired
+
     DataSource dataSource;
 
     private boolean fail;
+
+    @Autowired
+    public HelloController(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @GetMapping("/hello")
     public ResponseEntity<String> sayHello() {
