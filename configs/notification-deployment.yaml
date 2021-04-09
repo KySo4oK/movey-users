@@ -13,7 +13,7 @@ spec:
         app: notification-service               # мітка Pod по якому вона буде зв'язана з Deployment та Service
     spec:
       containers:
-        - image: rostyslavpryimak/lab-notification-service:0.0.1    # образ Docker
+        - image: rostyslavpryimak/lab-notification-service:0.0.2    # образ Docker
           imagePullPolicy: Always   # вказує k8s, що образ не потрібно завантажувати (варто використовувати лише для випадків, коли образи локальні)
           name: notification-service           # ім'я контейнеру
           ports:
