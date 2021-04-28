@@ -27,6 +27,13 @@ spec:
                 name: notification-service-service
                 port:
                   number: 80
+          - path: /sccs
+            pathType: Prefix
+            backend:
+              service:
+                name: sccs-service-service
+                port:
+                  number: 80
           - path: /db
             pathType: Prefix
             backend:
