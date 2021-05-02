@@ -18,9 +18,12 @@ public class HelloController {
 
     private boolean fail;
 
+    RabbitMqReceiver rabbitMqReceiver;
+
     @Autowired
-    public HelloController(DataSource dataSource) {
+    public HelloController(DataSource dataSource, RabbitMqReceiver rabbitMqReceiver) {
         this.dataSource = dataSource;
+        this.rabbitMqReceiver = rabbitMqReceiver;
     }
 
     @GetMapping("/hello")
@@ -48,5 +51,15 @@ public class HelloController {
     @GetMapping("/live")
     public void live() {
         fail = false;
+    }
+
+    @GetMapping("/rabbit")
+    public String listenRabbit() {
+        try {
+            return rabbitMqReceiver.getMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "listener error";
+        }
     }
 }
