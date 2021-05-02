@@ -1,9 +1,9 @@
 spring:
   rabbitmq:
     host: rabbitmq
-    password: admin
+    password: admin1
     port: 5672
-    username: admin
+    username: admin1
     exchange: user.exchange
     queue: user.queue
     routingkey: user.routingkey

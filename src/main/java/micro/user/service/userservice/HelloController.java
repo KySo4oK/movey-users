@@ -1,6 +1,7 @@
 package micro.user.service.userservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,10 @@ import java.time.Instant;
 @RestController
 @RequestMapping("/user")
 public class HelloController {
+    String message;
+
+    @Autowired
+    CustomDataSourceConfig customDataSourceConfig;
 
     DataSource dataSource;
 
@@ -31,7 +36,7 @@ public class HelloController {
         if (fail) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("Hello! User microservice is on Kubernetes now!" + Instant.now(), HttpStatus.OK);
+        return new ResponseEntity<>("Hello! User microservice is on Kubernetes now!" + Instant.now() + message, HttpStatus.OK);
     }
 
     @GetMapping("/db")
