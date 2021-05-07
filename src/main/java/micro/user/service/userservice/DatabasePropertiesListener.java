@@ -10,6 +10,7 @@ import java.util.Properties;
 
 public class DatabasePropertiesListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
     ConfigClient configClient = new ConfigClient();
+
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         ConfigurableEnvironment environment = event.getEnvironment();
         Properties props = new Properties();

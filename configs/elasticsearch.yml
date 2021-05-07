@@ -6,7 +6,7 @@ metadata:
     k8s-app: elasticsearch-logging
 spec:
   serviceName: elasticsearch-logging
-  replicas: 2
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
   selector:
@@ -17,7 +17,6 @@ spec:
       labels:
         k8s-app: elasticsearch-logging
     spec:
-      serviceAccountName: elasticsearch-logging
       containers:
         - image: elasticsearch:6.8.4
           name: elasticsearch-logging

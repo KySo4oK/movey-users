@@ -7,5 +7,5 @@ spec:
     app: logstash
   ports:
   - protocol: TCP
-    port: 5044
-    targetPort: 5044
+    port: 4560
+    targetPort: 4560
