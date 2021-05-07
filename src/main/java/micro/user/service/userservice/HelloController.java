@@ -1,7 +1,7 @@
 package micro.user.service.userservice;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.time.Instant;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/user")
 public class HelloController {
-    String message;
 
-    @Autowired
-    CustomDataSourceConfig customDataSourceConfig;
+    private static final Logger log = Logger.getLogger(String.valueOf(HelloController.class));
+
+    String message;
 
     DataSource dataSource;
 
@@ -33,6 +34,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> sayHello() {
+        log.info("called hello endpoint");
         if (fail) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -41,6 +43,7 @@ public class HelloController {
 
     @GetMapping("/db")
     public String dbTest(){
+        log.warning("called db endpoint");
         try {
             return dataSource.getConnection().getSchema();
         } catch (Exception throwables) {
