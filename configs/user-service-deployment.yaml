@@ -18,3 +18,9 @@ spec:
           name: user-service           # ім'я контейнеру
           ports:
             - containerPort: 8080
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: key
