@@ -1,0 +1,5 @@
+{
+    "clientId": "user-service",
+    "enabled": true,
+    "bearerOnly": true
+}

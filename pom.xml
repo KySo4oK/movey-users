@@ -14,16 +14,36 @@
     <name>user-service</name>
     <description>User Microservice</description>
     <properties>
-        <java.version>15</java.version>
+        <java.version>8</java.version>
+        <arquillian-managed>false</arquillian-managed>
+        <version.keycloak>12.0.0</version.keycloak>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${springboot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.keycloak.bom</groupId>
+                <artifactId>keycloak-adapter-bom</artifactId>
+                <version>${version.keycloak}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,14 +61,23 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-adapter-core</artifactId>
+            <version>12.0.0</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-quickstart-realm-file-exist</id>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
@@ -63,9 +92,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <username>ivanluchkin</username>
-                    <password></password>
-                    <repository>ivanluchkin/lab-user-service</repository>
+                    <username>rostyslavpryimak</username>
+                    <password>123454321</password>
+                    <repository>rostyslavpryimak/lab-user-service</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/user-service-${project.version}.jar</JAR_FILE>
