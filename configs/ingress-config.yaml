@@ -4,6 +4,16 @@ metadata:
   name: demo-ingress
 spec:
   rules:
+    - host: grafana
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80
     - http:
         paths:
           - path: /user      # шлях по якому відбувається перенаправлення на сервіс
@@ -27,11 +37,11 @@ spec:
                 name: notification-service-service
                 port:
                   number: 80
-          - path: /sccs
+          - path: /review
             pathType: Prefix
             backend:
               service:
-                name: sccs-service-service
+                name: review-service-service
                 port:
                   number: 80
           - path: /db
