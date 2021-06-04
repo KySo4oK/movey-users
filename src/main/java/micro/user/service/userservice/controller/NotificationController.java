@@ -3,13 +3,12 @@ package micro.user.service.userservice.controller;
 import lombok.RequiredArgsConstructor;
 import micro.user.service.userservice.entity.User;
 import micro.user.service.userservice.service.SuggestionsService;
-import micro.user.service.userservice.service.SwipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/user/notification")
 @RequiredArgsConstructor
 public class NotificationController {
     private final SuggestionsService service;
