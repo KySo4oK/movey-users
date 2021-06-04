@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @FeignClient(name = "suggestions-service", url = "notification-service-service.default.svc.cluster.local")
 public interface SuggestionsService {
     @GetMapping(value = "/notification/hello")
@@ -18,5 +20,5 @@ public interface SuggestionsService {
     ResponseEntity postSaving(@PathVariable("movieId") String movieId, @PathVariable("userId") String userId);
 
     @GetMapping(value = "/notification/savings/{userId}/")
-    ResponseEntity getSavings(@PathVariable("userId") String userId);
+    List<String> getSavings(@PathVariable("userId") String userId);
 }

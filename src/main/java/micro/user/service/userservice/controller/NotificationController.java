@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user/notification")
 @RequiredArgsConstructor
@@ -23,13 +25,13 @@ public class NotificationController {
         return service.hello();
     }
 
-    @PostMapping(value = "/savings/{movieId}/")
+    @PostMapping(value = "/savings/{movieId}")
     ResponseEntity postSaving(@PathVariable("movieId") String movieId) {
         return service.postSaving(movieId, String.valueOf(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId()));
     }
 
-    @GetMapping(value = "/savings/")
-    ResponseEntity getSavings() {
+    @GetMapping(value = "/savings")
+    List<String> getSavings() {
         String userId = String.valueOf(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
         return service.getSavings(userId);
     }
