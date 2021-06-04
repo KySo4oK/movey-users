@@ -23,13 +23,14 @@ public class NotificationController {
         return service.hello();
     }
 
-    @PostMapping(value = "/notification/savings/{movieId}/")
+    @PostMapping(value = "/savings/{movieId}/")
     ResponseEntity postSaving(@PathVariable("movieId") String movieId) {
         return service.postSaving(movieId, String.valueOf(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId()));
     }
 
-    @GetMapping(value = "/notification/savings/")
+    @GetMapping(value = "/savings/")
     ResponseEntity getSavings() {
-        return service.getSavings(String.valueOf(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId()));
+        String userId = String.valueOf(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
+        return service.getSavings(userId);
     }
 }
