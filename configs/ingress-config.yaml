@@ -34,7 +34,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: notification-service-service
+                name: user-service-service
                 port:
                   number: 80
           - path: /review
