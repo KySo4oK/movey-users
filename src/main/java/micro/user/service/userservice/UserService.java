@@ -1,6 +1,7 @@
 package micro.user.service.userservice;
 
 import lombok.extern.log4j.Log4j2;
+import micro.user.service.userservice.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

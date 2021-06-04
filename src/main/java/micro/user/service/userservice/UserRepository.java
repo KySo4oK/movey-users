@@ -1,5 +1,6 @@
 package micro.user.service.userservice;
 
+import micro.user.service.userservice.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

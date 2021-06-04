@@ -36,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().and().csrf().disable().authorizeRequests()
                 .antMatchers("/user/db").hasAuthority("USER")
                 .antMatchers("/css/**", "/user/hello").permitAll()
-                .antMatchers("/reg", "/", "/user/login", "/login", "/user").permitAll()
-                .and().formLogin().loginProcessingUrl("/user/login").successForwardUrl("/user/db");
+                .antMatchers("/reg", "/", "/user/login", "/login", "/user", "/user/savings*").permitAll()
+                .and().formLogin().loginProcessingUrl("/user/login").successForwardUrl("/user/hello");
     }
 
     @Bean

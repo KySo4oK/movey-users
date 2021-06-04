@@ -4,6 +4,6 @@ spring:
     password: admin1
     port: 5672
     username: admin1
-    exchange: user.exchange
-    queue: user.queue
-    routingkey: user.routingkey
+    exchange: movie.exchange
+    queue: movie.queue
+    routingkey: movie.routingkey

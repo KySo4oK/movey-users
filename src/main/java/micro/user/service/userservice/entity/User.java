@@ -1,4 +1,4 @@
-package micro.user.service.userservice;
+package micro.user.service.userservice.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,13 @@
-package micro.user.service.userservice;
+package micro.user.service.userservice.controller;
 
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +27,9 @@ public class HelloController {
 
     private boolean fail;
 
-    RabbitMqReceiver rabbitMqReceiver;
-
     @Autowired
-    public HelloController(DataSource dataSource, RabbitMqReceiver rabbitMqReceiver) {
+    public HelloController(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.rabbitMqReceiver = rabbitMqReceiver;
     }
 
     @GetMapping("/hello")
@@ -61,13 +61,20 @@ public class HelloController {
         fail = false;
     }
 
-    @GetMapping("/rabbit")
-    public String listenRabbit() {
-        try {
-            return rabbitMqReceiver.getMessage();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "listener error";
-        }
+//
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Value("${spring.rabbitmq.exchange}")
+    private String exchange;
+    @Value("${spring.rabbitmq.routingkey}")
+    private String routingkey;
+
+
+    @GetMapping("/emit/{service}/{message}")
+    String emitToMovieQueue(@PathVariable(name = "message") String message,
+                            @PathVariable(name = "service") String service) {
+        rabbitTemplate.convertAndSend(service + ".exchange", service + ".routingkey", message);
+        return "Message sent";
     }
 }
