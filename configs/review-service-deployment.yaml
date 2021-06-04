@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-service-deployment
+spec:
+  replicas: 1                      # кількість екземплярів Pod, що буде створено цим Deployment
+  selector:
+    matchLabels:
+      app: review-service                # селектор по якому Deployment зв'язаний з Pod
+  template:
+    metadata:
+      labels:
+        app: review-service               # мітка Pod по якому вона буде зв'язана з Deployment та Service
+    spec:
+      containers:
+        - image: rostyslavpryimak/lab-review-service:0.0.1     # образ Docker
+          imagePullPolicy: Always   # вказує k8s, що образ не потрібно завантажувати (варто використовувати лише для випадків, коли образи локальні)
+          name: review-service           # ім'я контейнеру
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: key
