@@ -1,6 +1,7 @@
 package micro.user.service.userservice.controller;
 
 
+import micro.user.service.userservice.service.SuggestionsService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,9 @@ public class HelloController {
     private boolean fail;
 
     @Autowired
+    SuggestionsService service;
+
+    @Autowired
     public HelloController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -41,8 +45,13 @@ public class HelloController {
         return new ResponseEntity<>("Hello! User microservice is on Kubernetes now!" + Instant.now() + message, HttpStatus.OK);
     }
 
+    @GetMapping("/hello/s")
+    public String helloFromSuggestions() {
+        return service.hello();
+    }
+
     @GetMapping("/db")
-    public String dbTest(){
+    public String dbTest() {
         log.warning("called db endpoint");
         try {
             return dataSource.getConnection().getSchema();
@@ -61,7 +70,7 @@ public class HelloController {
         fail = false;
     }
 
-//
+    //
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
